@@ -16,12 +16,12 @@ button {
     height: 50px; 
 }
 .flex-container {
-    width: 100%;  
+    width: 80%;
     height: auto; 
     display: flex; 
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: center; 
+    justify-content: center;
 }
 .Card {
     width: 200px; 
@@ -34,18 +34,24 @@ button {
     line-height: 250px; 
     margin: 20px; 
 }
+img {
+    border-radius: 20px;
+}
 h1 {
     font-family: cursive;
     font-size: 35px;
     text-align: center;
 }
+h2 {
+    text-align: center;
+    font-size: 24px;
+    font-family: cursive;
+}
 .pts {
     font-family: cursive;
-    display: inline-block;
-    text-align: right;
+    display: flex;
+    text-align: row;
     padding: 0px 0px 0px 80%
-
-
 }
 #title {
     font-family: cursive;
@@ -61,6 +67,7 @@ h1 {
 }
 .Right {
     font-family: cursive;
-    display: inline-block; 
+    display: flex; 
+    text-align: row; 
     padding: 0px 0px 0px 25px; 
 }
