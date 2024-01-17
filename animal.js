@@ -20,13 +20,11 @@
 let userTries = 5;
 let userPts = 0 
 
-const buttonStart = document.querySelector(".btn");
-const buttonRestart = document.querySelector(".btn2");
-const img = document.querySelector(".Card")
+let buttonStart = document.querySelector("#start");
+const buttonRestart = document.querySelector("#restart");
 
 // This button is clickable for the player and will alert the player once the game has begun. 
 buttonStart.addEventListener('click', event => {
-    // alert("You clicked the button");
     event.target.style.backgroundColor = "red"
     let cards = document.querySelector(".alert")
     cards.innerHTML = "GAME HAS BEGUN";
@@ -39,19 +37,53 @@ buttonRestart.addEventListener('click', event => {
     event.target.style.backgroundColor = "red"
 })
 
-// This function will allow the player to click a random card and reveal the image. 
-function flipCard() {
-    let img = document.querySelector('.Card'); 
-    img.src = "https://media.4-paws.org/1/e/d/6/1ed6da75afe37d82757142dc7c6633a532f53a7d/VIER%20PFOTEN_2019-03-15_001-2886x1999-1920x1330.jpg";
-}
+// This function will allow the player to click a random card and reveal a image. 
 
-img.addEventListener('click', flipCard()); 
+let puppy = document.querySelectorAll("#puppy");
+    for (i = 0; i < puppy.length; i++){
+        puppy[i].addEventListener('click',function(event) {
+            event.preventDefault()
+            event.target.setAttribute('src', 'Project1/puppy1.jpeg'); 
+        })
+        puppy[1].addEventListener('click', matchedCards)
+            
+    }
+let crazycat = document.querySelectorAll("#crazycat");
+    for (i = 0; i < crazycat.length; i++){
+        crazycat[i].addEventListener('click',function(event) {
+            event.preventDefault()
+            event.target.setAttribute('src', 'Project1/crazycat.jpeg'); 
+        })
+    }   
 
+let crazyhamster = document.querySelectorAll("#crazyhamster");
+    for (i = 0; i < crazyhamster.length; i++){
+        crazyhamster[i].addEventListener('click',function(event) {
+            event.preventDefault()
+            event.target.setAttribute('src', 'Project1/WorkingHamster.jpeg'); 
+        })
+    }  
 
-// This function will determine if the cards are similar and give the player  a pt if matched. 
+let panda = document.querySelectorAll("#panda");
+    for (i = 0; i < panda.length; i++){
+        panda[i].addEventListener('click',function(event) {
+            event.preventDefault()
+            event.target.setAttribute('src', 'Project1/panda.jpeg'); 
+         })
+    }     
+
+// This function will determine if the cards are similar and give the player a pt if matched. 
+let card1 = "puppy"
+let card2 = "puppy"
+let card3 = crazycat[0]
+let card4 = crazycat[1]
+
 function matchedCards() {
-
+   if (card1 === "puppy" && card2 === "puppy"){
+    console.log("They match!")
+   }
 }
+console.log(matchedCards())
 // This fuunction will dtermine if the cards are not similar and not give the pt. to player. 
 function nonMatchedCard() {
 
