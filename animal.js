@@ -20,6 +20,10 @@
 let userTries = 5;
 let userPts = 0 
 
+let card1 = null
+let card2 = null
+
+
 let buttonStart = document.querySelector("#start");
 const buttonRestart = document.querySelector("#restart");
 
@@ -28,7 +32,11 @@ buttonStart.addEventListener('click', event => {
     event.target.style.backgroundColor = "red"
     let cards = document.querySelector(".alert")
     cards.innerHTML = "GAME HAS BEGUN";
-    return
+    setTimeout(() => {
+        let cards = document.querySelector(".alert")
+        cards.innerHTML = "";
+    }, 2000)
+
 }); 
 
 // This gives the player the option to restart the game if player wishes. 
@@ -39,13 +47,16 @@ buttonRestart.addEventListener('click', event => {
 
 // This function will allow the player to click a random card and reveal a image. 
 
+
 let puppy = document.querySelectorAll("#puppy");
     for (i = 0; i < puppy.length; i++){
         puppy[i].addEventListener('click',function(event) {
             event.preventDefault()
-            event.target.setAttribute('src', 'Project1/puppy1.jpeg'); 
+            event.target.setAttribute('src', 'Project1/puppy1.jpeg');
+            matchedCards(event.target.id)
+            // nonMatchedCard(event.target.id)
+        
         })
-        puppy[1].addEventListener('click', matchedCards)
             
     }
 let crazycat = document.querySelectorAll("#crazycat");
@@ -53,6 +64,8 @@ let crazycat = document.querySelectorAll("#crazycat");
         crazycat[i].addEventListener('click',function(event) {
             event.preventDefault()
             event.target.setAttribute('src', 'Project1/crazycat.jpeg'); 
+            matchedCards(event.target.id) 
+            // nonMatchedCard(event.target.id)
         })
     }   
 
@@ -60,7 +73,9 @@ let crazyhamster = document.querySelectorAll("#crazyhamster");
     for (i = 0; i < crazyhamster.length; i++){
         crazyhamster[i].addEventListener('click',function(event) {
             event.preventDefault()
-            event.target.setAttribute('src', 'Project1/WorkingHamster.jpeg'); 
+            event.target.setAttribute('src', 'Project1/WorkingHamster.jpeg');
+            matchedCards(event.target.id) 
+            // nonMatchedCard(event.target.id)
         })
     }  
 
@@ -69,22 +84,41 @@ let panda = document.querySelectorAll("#panda");
         panda[i].addEventListener('click',function(event) {
             event.preventDefault()
             event.target.setAttribute('src', 'Project1/panda.jpeg'); 
+            matchedCards(event.target.id) 
+            // nonMatchedCard(event.target.id)
          })
     }     
 
 // This function will determine if the cards are similar and give the player a pt if matched. 
-let card1 = "puppy"
-let card2 = "puppy"
-let card3 = crazycat[0]
-let card4 = crazycat[1]
 
-function matchedCards() {
-   if (card1 === "puppy" && card2 === "puppy"){
-    console.log("They match!")
-   }
+function matchedCards(id) {
+if (card1 === null){
+    card1 = id
 }
-console.log(matchedCards())
-// This fuunction will dtermine if the cards are not similar and not give the pt. to player. 
-function nonMatchedCard() {
+else if (card2 === null){ // Assignment
+    card2 = id
+}
+if (card1 === card2){
+// Give a pt. to player 
+userPts =+ 1
+userPts.append(Pts)
+let alert = document.querySelector(".alert")
+alert.innerHTML = "They Match!"
+setTimeout(() => {
+let alert = document.querySelector(".alert")
+alert.innerHTML = ""
+}, 1000)
+
+}
+
+else if (card1 !== card2 && card1 !== null && card2 !== null) {
+        event.target.setAttribute("src", ""); 
+        let alert1 = document.querySelector(".alert")
+        alert1.innerHTML = "Not a Match, Try Again!"
+        setTimeout(() => {
+            let alert1 = document.querySelector(".alert")
+            alert1.innerHTML = ""
+        }, 1000)
+}
 
 }
