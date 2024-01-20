@@ -16,7 +16,6 @@
 // Additional bonus: Player can restart the game whenever they seem fit
 // and it refreshes the page. 
 
-// Assignments 
 let userTries = 3;
 let userPts = 0 
 
@@ -25,20 +24,8 @@ let card2 = null
 
 document.querySelector(".tries").innerHTML = "Number of Tries: " + userTries
 document.querySelector(".score").innerHTML = "Points: " + userPts
-// let buttonStart = document.querySelector("#start");
 const buttonRestart = document.querySelector("#restart");
 
-// This button is clickable for the player and will alert the player once the game has begun. 
-// buttonStart.addEventListener('click', event => {
-//     event.target.style.backgroundColor = "red"
-//     let cards = document.querySelector(".alert")
-//     cards.innerHTML = "GAME HAS BEGUN";
-//     setTimeout(() => {
-//         let cards = document.querySelector(".alert")
-//         cards.innerHTML = "";
-//     }, 2000)
-
-// }); 
 
 // This gives the player the option to restart the game if player wishes. 
 buttonRestart.addEventListener('click', event => {
@@ -68,7 +55,7 @@ let crazyhamster = document.querySelectorAll("#crazyhamster");
         crazyhamster[i].addEventListener('click', handleClick)
     }  
 
-let panda = document.querySelectorAll("#panda");
+let panda = document.querySelectorAll("#Panda");
     for (i = 0; i < panda.length; i++){
         panda[i].addEventListener('click',handleClick)
     }     
@@ -79,12 +66,19 @@ function matchedCards(id) {
 if (card1 === null){
     card1 = id
 }
-else if (card2 === null){ // Assignment
+else if (card2 === null){ 
     card2 = id
 }
+
 if (card1 === card2){
 userPts += 1
 document.querySelector(".score").innerHTML = "Points: " + userPts 
+if (userPts === 4){
+    document.querySelector(".won").innerHTML = "You have won the game! Congrats!";
+    setTimeout(() => {
+        window.location.reload(true); 
+    }, 2000)
+}
 userTries = userTries
 document.querySelector(".tries").innerHTML = "Number of Tries: " + userTries
 // Give a pt. to player 
@@ -96,7 +90,6 @@ alert.innerHTML = ""
 }, 1000)
 let cards = document.querySelectorAll(`#${card1}`)
 for (i = 0; i < cards.length; i++){
-    console.log(cards[i])
     cards[i].removeEventListener('click', handleClick)     
 }
 card1 = null
@@ -104,15 +97,13 @@ card2 = null
 }
 
 else if (card1 !== card2 && card1 !== null && card2 !== null) {
-        event.target.setAttribute("src", "Project1/background.jpeg")
-        document.querySelector(`#${card1}`).setAttribute("src", "Project1/background.jpeg")
+    
+            document.querySelector(`#${card1}`).setAttribute("src", "Project1/background.jpeg"); 
+            event.target.setAttribute("src", "Project1/background.jpeg");
+
         document.querySelector(".score").innerHTML = "Points: " + userPts
         userTries = userTries - 1
-        card1 = null
-        card2 = null
-        if (userPts !== 0 ) {
-            userPts = userPts - 1
-        } 
+
         document.querySelector(".tries").innerHTML = "Number of Tries: " + userTries
         let alert1 = document.querySelector(".alert")
         alert1.innerHTML = "Not a Match, Try Again!"
@@ -126,6 +117,7 @@ else if (card1 !== card2 && card1 !== null && card2 !== null) {
                 window.location.reload(true); 
             }, 2000)
         }
-}
-
+        card1 = null
+        card2 = null
+} 
 }
