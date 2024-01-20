@@ -17,27 +17,28 @@
 // and it refreshes the page. 
 
 // Assignments 
-let userTries = 5;
+let userTries = 3;
 let userPts = 0 
 
 let card1 = null
 let card2 = null
 
-
-let buttonStart = document.querySelector("#start");
+document.querySelector(".tries").innerHTML = "Number of Tries: " + userTries
+document.querySelector(".score").innerHTML = "Points: " + userPts
+// let buttonStart = document.querySelector("#start");
 const buttonRestart = document.querySelector("#restart");
 
 // This button is clickable for the player and will alert the player once the game has begun. 
-buttonStart.addEventListener('click', event => {
-    event.target.style.backgroundColor = "red"
-    let cards = document.querySelector(".alert")
-    cards.innerHTML = "GAME HAS BEGUN";
-    setTimeout(() => {
-        let cards = document.querySelector(".alert")
-        cards.innerHTML = "";
-    }, 2000)
+// buttonStart.addEventListener('click', event => {
+//     event.target.style.backgroundColor = "red"
+//     let cards = document.querySelector(".alert")
+//     cards.innerHTML = "GAME HAS BEGUN";
+//     setTimeout(() => {
+//         let cards = document.querySelector(".alert")
+//         cards.innerHTML = "";
+//     }, 2000)
 
-}); 
+// }); 
 
 // This gives the player the option to restart the game if player wishes. 
 buttonRestart.addEventListener('click', event => {
@@ -47,46 +48,29 @@ buttonRestart.addEventListener('click', event => {
 
 // This function will allow the player to click a random card and reveal a image. 
 
-
+const handleClick = function(event) {
+    event.preventDefault()
+    event.target.setAttribute('src', `Project1/${event.target.id}.jpeg`);
+    matchedCards(event.target.id)
+}
 let puppy = document.querySelectorAll("#puppy");
     for (i = 0; i < puppy.length; i++){
-        puppy[i].addEventListener('click',function(event) {
-            event.preventDefault()
-            event.target.setAttribute('src', 'Project1/puppy1.jpeg');
-            matchedCards(event.target.id)
-            // nonMatchedCard(event.target.id)
-        
-        })
+        puppy[i].addEventListener('click',handleClick)
             
     }
 let crazycat = document.querySelectorAll("#crazycat");
     for (i = 0; i < crazycat.length; i++){
-        crazycat[i].addEventListener('click',function(event) {
-            event.preventDefault()
-            event.target.setAttribute('src', 'Project1/crazycat.jpeg'); 
-            matchedCards(event.target.id) 
-            // nonMatchedCard(event.target.id)
-        })
+        crazycat[i].addEventListener('click', handleClick)
     }   
 
 let crazyhamster = document.querySelectorAll("#crazyhamster");
     for (i = 0; i < crazyhamster.length; i++){
-        crazyhamster[i].addEventListener('click',function(event) {
-            event.preventDefault()
-            event.target.setAttribute('src', 'Project1/WorkingHamster.jpeg');
-            matchedCards(event.target.id) 
-            // nonMatchedCard(event.target.id)
-        })
+        crazyhamster[i].addEventListener('click', handleClick)
     }  
 
 let panda = document.querySelectorAll("#panda");
     for (i = 0; i < panda.length; i++){
-        panda[i].addEventListener('click',function(event) {
-            event.preventDefault()
-            event.target.setAttribute('src', 'Project1/panda.jpeg'); 
-            matchedCards(event.target.id) 
-            // nonMatchedCard(event.target.id)
-         })
+        panda[i].addEventListener('click',handleClick)
     }     
 
 // This function will determine if the cards are similar and give the player a pt if matched. 
@@ -99,26 +83,49 @@ else if (card2 === null){ // Assignment
     card2 = id
 }
 if (card1 === card2){
+userPts += 1
+document.querySelector(".score").innerHTML = "Points: " + userPts 
+userTries = userTries
+document.querySelector(".tries").innerHTML = "Number of Tries: " + userTries
 // Give a pt. to player 
-userPts =+ 1
-userPts.append(Pts)
 let alert = document.querySelector(".alert")
 alert.innerHTML = "They Match!"
 setTimeout(() => {
 let alert = document.querySelector(".alert")
 alert.innerHTML = ""
 }, 1000)
-
+let cards = document.querySelectorAll(`#${card1}`)
+for (i = 0; i < cards.length; i++){
+    console.log(cards[i])
+    cards[i].removeEventListener('click', handleClick)     
+}
+card1 = null
+card2 = null
 }
 
 else if (card1 !== card2 && card1 !== null && card2 !== null) {
-        event.target.setAttribute("src", ""); 
+        event.target.setAttribute("src", "Project1/background.jpeg")
+        document.querySelector(`#${card1}`).setAttribute("src", "Project1/background.jpeg")
+        document.querySelector(".score").innerHTML = "Points: " + userPts
+        userTries = userTries - 1
+        card1 = null
+        card2 = null
+        if (userPts !== 0 ) {
+            userPts = userPts - 1
+        } 
+        document.querySelector(".tries").innerHTML = "Number of Tries: " + userTries
         let alert1 = document.querySelector(".alert")
         alert1.innerHTML = "Not a Match, Try Again!"
         setTimeout(() => {
             let alert1 = document.querySelector(".alert")
             alert1.innerHTML = ""
         }, 1000)
+        if (userTries == 0) {
+            document.querySelector(".gameover").innerHTML = "You have lost the Game! <br> Restart Game!";
+            setTimeout(() => {
+                window.location.reload(true); 
+            }, 2000)
+        }
 }
 
 }
